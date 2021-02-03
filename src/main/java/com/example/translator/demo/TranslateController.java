@@ -1,5 +1,17 @@
 package com.example.translator.demo;
 
+//P.S все, что помечено как TODO, нужно сделать
+
+/* TODO
+* Почитай про паттерн MVC, мы будем его использовать и следуя этому паттерну тебе нужно создать пакеты:
+    * controller
+    * service
+    * repository
+    * model
+и разместить классы в них
+Используй java 8 в проекте
+* */
+
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +25,20 @@ public class TranslateController {
 
     @GetMapping("/{from}/{to}/{word}")
     public TranslationRequest translating(@PathVariable String from, @PathVariable String to, @PathVariable String word) {
+        //TODO: Идеалогически, ты возвращаешь ответ в этом методе, то есть это будет response, тогда правильнее было бы назвать не
+        // TranslationRequest а TranslationResponse, но мы будем использовать паттерт <Entity>Transport, то есть если сущность Trsnsaltion, то для нее DTO класс
+        // будет TranslationTransport
+        /*TODO: Сделаем рефакторинг. Добавим
+        enum Language {
+            EN("eng"),
+            RU("rus"),
+            FR("fr");
+        }
+
+        и теперь мы будем работать не со строками, а с типом Language. String from = "eng" будет маппиться в Language EN
+        */
+
+
         HashSet<String> request = new HashSet<String>();
         request.add(from);
         request.add(to);
@@ -21,6 +47,7 @@ public class TranslateController {
                 if(translation.contains(word))
                     return new TranslationRequest(translation.requestTranslation(from));
         }
+        //TODO: Для того, чтобы возвращать сущности с кодами ошибок используй ResponseEntity<T>
         return new TranslationRequest("404");
     }
 

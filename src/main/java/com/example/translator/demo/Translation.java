@@ -1,6 +1,7 @@
 package com.example.translator.demo;
 
 public class Translation {
+    //TODO: старайся давать осмысленные имена переменным и методам. В данном случае лучше назвать переменные fromWord и toWord и тд
     private final String firstWord;
     private final String secondWord;
     private final String firstLanguage;
@@ -13,6 +14,8 @@ public class Translation {
         this.secondLanguage = secondLanguage;
     }
 
+    //можно назвать проще translate(String from), будет лаконичнее, не нужно много букав
+    //TODO: используй форматирование кода, чтобы было красиво и читабельно, можещь использовать google code style
     public String requestTranslation(String from){
         if(from.equals(firstLanguage))
             return secondWord;

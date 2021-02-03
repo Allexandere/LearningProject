@@ -7,6 +7,7 @@ public class TranslationRequest {
         this.translate = translate;
     }
 
+    //TODO: не пиши гетерры и сеттеры, упрости себе жизнь, используй lambook аннотации @Getter, @Setter, @Data
     public String getTranslate() {
         return translate;
     }
