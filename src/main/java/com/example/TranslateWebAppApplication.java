@@ -1,15 +1,12 @@
-package com.example.translator.demo;
+package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.HashSet;
-import java.util.concurrent.ConcurrentHashMap;
-
 @SpringBootApplication
 public class TranslateWebAppApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		/*
 		Translation newTranslation = new Translation("milk","молоко","en","ru");
 		Translation newTranslation1 = new Translation("cow","корова","en","ru");
@@ -25,6 +22,6 @@ public class TranslateWebAppApplication {
 		TranslateController.dictionary.put(request, tmp);
 		System.out.println(TranslateController.dictionary);
 		 */
-		SpringApplication.run(TranslateWebAppApplication.class, args);
-	}
+        SpringApplication.run(TranslateWebAppApplication.class, args);
+    }
 }
