@@ -1,7 +1,11 @@
-package com.example.translator.demo;
+package com.example.model;
+
+import lombok.Setter;
 
 public class TranslationBody {
+    @Setter
     private String from_word;
+    @Setter
     private String to_word;
 
     public String getFrom_word() {
@@ -10,14 +14,6 @@ public class TranslationBody {
 
     public String getTo_word() {
         return to_word;
-    }
-
-    public void setFrom_word(String from_word) {
-        this.from_word = from_word;
-    }
-
-    public void setTo_word(String to_word) {
-        this.to_word = to_word;
     }
 
 }
