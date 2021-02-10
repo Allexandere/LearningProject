@@ -1,7 +1,6 @@
 package com.example.service;
 
 public class Translation {
-    //TODO: старайся давать осмысленные имена переменным и методам. В данном случае лучше назвать переменные fromWord и toWord и тд
     private final String fromWord;
     private final String toWord;
     private final String fromLanguage;
@@ -14,8 +13,6 @@ public class Translation {
         this.toLanguage = toLanguage;
     }
 
-    //можно назвать проще translate(String from), будет лаконичнее, не нужно много букав
-    //TODO: используй форматирование кода, чтобы было красиво и читабельно, можещь использовать google code style
     public String translate(String from) {
         if (from.equals(fromLanguage))
             return toWord;
