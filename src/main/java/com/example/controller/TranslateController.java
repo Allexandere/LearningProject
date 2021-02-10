@@ -58,16 +58,13 @@ public class TranslateController {
         HashSet<Language> request = new HashSet<>();
         request.add(from);
         request.add(to);
+        Translation newTranslation = new Translation(translation.getFrom_word(),
+                translation.getTo_word(),
+                from.toString(),
+                to.toString());
         if (dictionary.containsKey(request)) {
-            dictionary.get(request).add(new Translation(translation.getFrom_word()
-                    , translation.getTo_word()
-                    , from.toString(),
-                    to.toString()));
+            dictionary.get(request).add(newTranslation);
         } else {
-            Translation newTranslation = new Translation(translation.getFrom_word(),
-                    translation.getTo_word(),
-                    from.toString(),
-                    to.toString());
             HashSet<Translation> tmp = new HashSet<>();
             tmp.add(newTranslation);
             dictionary.put(request, tmp);
