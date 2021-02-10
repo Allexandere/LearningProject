@@ -16,7 +16,7 @@ import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.example.service.Translation;
+import com.example.model.Translation;
 import com.example.model.TranslationBody;
 import com.example.model.TranslationTransport;
 import org.springframework.http.HttpStatus;

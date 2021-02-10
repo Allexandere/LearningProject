@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.model;
 
 public class Translation {
     private final String fromWord;
