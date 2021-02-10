@@ -31,21 +31,21 @@ public class TranslateController {
             new ConcurrentHashMap<>();
 
     enum Language {
-        EN,
-        RU,
-        FR
+        en,
+        ru,
+        fr
     }
 
     @GetMapping("/{from}/{to}/{word}")
-    public ResponseEntity<TranslationTransport> translating(@PathVariable String from, @PathVariable String to, @PathVariable String word) {
+    public ResponseEntity<TranslationTransport> translating(@PathVariable Language from, @PathVariable Language to, @PathVariable String word) {
         HashSet<Language> request = new HashSet<>();
-        request.add(Language.valueOf(from.toUpperCase()));
-        request.add(Language.valueOf(to.toUpperCase()));
+        request.add(from);
+        request.add(to);
         if (dictionary.containsKey(request)) {
             for (Translation translation : dictionary.get(request))
                 if (translation.contains(word))
                     return ResponseEntity.status(HttpStatus.OK)
-                            .body(new TranslationTransport(translation.translate(from)));
+                            .body(new TranslationTransport(translation.translate(from.toString())));
         }
         return ResponseEntity.notFound().build();
     }
@@ -53,21 +53,21 @@ public class TranslateController {
     @PostMapping(value = "/{from}/{to}/")
     @ResponseBody
     public TranslationBody addPair(TranslationBody translation,
-                                   @PathVariable String from,
-                                   @PathVariable String to) {
+                                   @PathVariable Language from,
+                                   @PathVariable Language to) {
         HashSet<Language> request = new HashSet<>();
-        request.add(Language.valueOf(from.toUpperCase()));
-        request.add(Language.valueOf(to.toUpperCase()));
+        request.add(from);
+        request.add(to);
         if (dictionary.containsKey(request)) {
             dictionary.get(request).add(new Translation(translation.getFrom_word()
                     , translation.getTo_word()
-                    , from,
-                    to));
+                    , from.toString(),
+                    to.toString()));
         } else {
             Translation newTranslation = new Translation(translation.getFrom_word(),
                     translation.getTo_word(),
-                    from,
-                    to);
+                    from.toString(),
+                    to.toString());
             HashSet<Translation> tmp = new HashSet<>();
             tmp.add(newTranslation);
             dictionary.put(request, tmp);
