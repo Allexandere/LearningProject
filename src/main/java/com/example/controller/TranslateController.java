@@ -16,6 +16,7 @@ import com.example.model.TranslationBody;
 import com.example.model.TranslationTransport;
 import com.example.service.TranslateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,17 +32,22 @@ public class TranslateController {
     }
 
     @GetMapping("/{from}/{to}/{word}")
-    public ResponseEntity<TranslationTransport> translating(@PathVariable String from,
-                                                            @PathVariable String to,
-                                                            @PathVariable String word) {
-        return translateService.translating(from, to, word);
+    public ResponseEntity translating(@PathVariable String from,
+                                      @PathVariable String to,
+                                      @PathVariable String word) {
+        String translation = translateService.findTranslation(from, to, word);
+        if(translation != null)
+            return ResponseEntity.status(HttpStatus.OK).body(new TranslationTransport(translation));
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping(value = "/{from}/{to}/")
     @ResponseBody
-    public TranslationBody addTranslation(TranslationBody translation,
+    public ResponseEntity addTranslation(TranslationBody translation,
                                           @PathVariable String from,
                                           @PathVariable String to) {
-        return translateService.addTranslation(translation, from, to);
+        TranslationBody translationBody = translateService.addTranslation(translation, from, to);
+        return ResponseEntity.status(HttpStatus.OK).body(translationBody);
     }
 }
