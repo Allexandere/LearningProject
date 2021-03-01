@@ -1,6 +1,7 @@
 package com.example.model;
 
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Setter;
 import lombok.Getter;
 
@@ -8,21 +9,12 @@ import javax.persistence.*;
 
 @Entity
 @Table
+@Data
 public class Translation {
-    @Setter
-    @Getter
     private String fromWord;
-    @Setter
-    @Getter
     private String toWord;
-    @Setter
-    @Getter
     private String fromLanguage;
-    @Setter
-    @Getter
     private String toLanguage;
-    @Getter
-    @Setter
     @Id
     @SequenceGenerator(
             name = "translation_sequence",
@@ -44,5 +36,6 @@ public class Translation {
     }
 
     public Translation() {
+
     }
 }
