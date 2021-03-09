@@ -2,7 +2,6 @@ package com.example.repository;
 
 import com.example.model.Translation;
 import com.example.model.TranslationRequest;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

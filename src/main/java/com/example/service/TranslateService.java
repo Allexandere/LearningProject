@@ -21,6 +21,7 @@ public class TranslateService {
 
     public Translation addTranslation(TranslationBody translationBody, String from, String to) {
         /*
+        Добавляю сразу две сущности
         1)т.к. не знаю как реализовать поиск перевода, имея только одну запись в словаре нужного типа
         2)т.к. не знаю как не добовлять новую запись, когда она уже присутствует
          */
