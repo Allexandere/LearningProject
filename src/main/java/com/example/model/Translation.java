@@ -1,5 +1,8 @@
 package com.example.model;
 
+import lombok.Data;
+
+@Data
 public class Translation {
     private final String fromWord;
     private final String toWord;
@@ -11,15 +14,5 @@ public class Translation {
         this.toWord = toWord;
         this.fromLanguage = fromLanguage;
         this.toLanguage = toLanguage;
-    }
-
-    public String translate(String from) {
-        if (from.equals(fromLanguage))
-            return toWord;
-        return fromWord;
-    }
-
-    public boolean contains(String word) {
-        return word.equals(fromWord) || word.equals(toWord);
     }
 }
