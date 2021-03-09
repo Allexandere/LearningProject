@@ -2,30 +2,27 @@ package com.example.service;
 
 import com.example.model.Translation;
 import com.example.model.TranslationBody;
+import com.example.model.TranslationRequest;
 import com.example.repository.TranslateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-@Component
+@Service
+@Transactional
 public class TranslateService {
 
-    private final TranslateRepository translateRepository;
-
     @Autowired
-    public TranslateService(TranslateRepository translateRepository) {
-        this.translateRepository = translateRepository;
+    private TranslateRepository translateRepository;
+
+    public Translation findTranslation(TranslationRequest translationRequest) {
+        return translateRepository.getTranslation(translationRequest);
     }
 
-    public String findTranslation(String from, String to, String word) {
-        Optional<Translation> translation = translateRepository.findTranslationByFromLanguageAndToLanguageAndFromWord(from, to, word);
-        return translation.map(Translation::getToWord).orElse(null);
-    }
-
-    public TranslationBody addTranslation(TranslationBody translation, String from, String to) {
-        translateRepository.save(new Translation(translation.getFrom_word(), translation.getTo_word(), from, to));
-        translateRepository.save(new Translation(translation.getTo_word(), translation.getFrom_word(), to, from));
-        return translation;
+    public Translation addTranslation(TranslationBody translationBody, String from, String to) {
+        Translation translation = new Translation(translationBody.getFrom_word(), translationBody.getTo_word(), from, to);
+        Translation reversedTranslation = new Translation(translationBody.getTo_word(), translationBody.getFrom_word(), to, from);
+        translateRepository.createTranslation(reversedTranslation);
+        return translateRepository.createTranslation(translation);
     }
 }

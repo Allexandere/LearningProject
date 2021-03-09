@@ -1,31 +1,21 @@
 package com.example.model;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
-import lombok.Getter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table
 @Data
-public class Translation {
+public class Translation implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String fromWord;
     private String toWord;
     private String fromLanguage;
     private String toLanguage;
-    @Id
-    @SequenceGenerator(
-            name = "translation_sequence",
-            sequenceName = "translation_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "translation_sequence"
-    )
-    private Long id;
 
 
     public Translation(String fromWord, String toWord, String fromLanguage, String toLanguage) {
@@ -36,6 +26,5 @@ public class Translation {
     }
 
     public Translation() {
-
     }
 }
